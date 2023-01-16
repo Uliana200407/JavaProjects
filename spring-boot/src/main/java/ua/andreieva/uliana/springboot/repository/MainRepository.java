@@ -1,6 +1,7 @@
 package ua.andreieva.uliana.springboot.repository;
 
 import org.springframework.stereotype.Repository;
+import ua.andreieva.uliana.springboot.service.OverallInf;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -57,13 +58,13 @@ public class MainRepository {
         return records;
     }
 
-    public void AddData(String project,String timestamp,String compilationTime,String result){
+    public void AddData(OverallInf request){
 
         ArrayList<String> newData = new ArrayList <> ();
-        newData.add ( project );
-        newData.add ( timestamp );
-        newData.add ( compilationTime );
-        newData.add ( result );
+        newData.add ( request.getProject () );
+        newData.add ( request.getTimestamp () );
+        newData.add ( request.getCompilationTime () );
+        newData.add ( request.getResult () );
         data.add ( newData);
     }
     public String getData(){
@@ -73,7 +74,6 @@ public class MainRepository {
                 string += Element + " ";
             }
             string += "\n";
-
         }
         return string;
     }

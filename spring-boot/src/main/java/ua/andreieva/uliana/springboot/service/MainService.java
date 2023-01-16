@@ -1,17 +1,18 @@
 package ua.andreieva.uliana.springboot.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import ua.andreieva.uliana.springboot.repository.MainRepository;
 
 import java.util.ArrayList;
 
+
 @Service
-public class MainService {
+public class MainService  {
 
     MainRepository object = new MainRepository ();
-    public void putData(String project,String timestamp,String compilationTime,String result ){
-
-        object.AddData ( project, timestamp, compilationTime, result );
+    public void putData( OverallInf request ){
+        object.AddData ( request );
     }
     public String getData(){
         return object.getData ();

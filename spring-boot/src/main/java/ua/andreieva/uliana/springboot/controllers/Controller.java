@@ -1,26 +1,55 @@
 package ua.andreieva.uliana.springboot.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
 import ua.andreieva.uliana.springboot.service.MainService;
+import ua.andreieva.uliana.springboot.service.OverallInf;
+
+import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/register-compilation-time")
+@RequestMapping("/")
 public class Controller {
+
 
     @Autowired
     private MainService service;
 
-    @PutMapping
-    public void addService(String project,String timestamp,String compilationTime,String result) {
-        service.putData (  project, timestamp, compilationTime, result );
+    @PutMapping(value = "/register-compilation-time")
+    public void addService(@RequestBody OverallInf request) {
+        service.putData (request );
     }
-    @GetMapping
-    public String getService(){
-       return service.getData ();
+
+    @GetMapping(value ="/register-compilation-time")
+    public String getService() {
+        return service.getData ();
+    }
+
+
+    @GetMapping(value ="/failed-results")
+    public ArrayList < String > getFailedRecords() {
+        return service.getFailedRecords ();
+    }
+
+    @GetMapping(value ="/long-compilation")
+    public ArrayList < String > getLongCompilation() {
+        return service.getLongCompilation ();
+    }
+
+    @GetMapping(value ="/normal-compilation")
+    public ArrayList < String > getNormalCompilation() {
+        return service.getNormalCompilation ();
+    }
+
+    @GetMapping(value ="/projects")
+    public ArrayList<String> getRecords(){
+        return service.getRecords ();
+    }
+
+    @GetMapping(value ="/success-result")
+    public ArrayList <String> getSuccessRecords(){
+        return service.getSuccessRecords ();
     }
 }
+
